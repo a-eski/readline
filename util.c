@@ -3,7 +3,7 @@
 /* Copyright (C) 1987-2017 Free Software Foundation, Inc.
 
    This file is part of the GNU Readline Library (Readline), a library
-   for reading lines of text with interactive input and history editing.      
+   for reading lines of text with interactive input and history editing.
 
    Readline is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -86,7 +86,7 @@ _rl_walphabetic (WCHAR_T wc)
   int c;
 
   if (iswalnum (wc))
-    return (1);     
+    return (1);
 
   c = wc & 0177;
   return (_rl_allow_pathname_alphabetic_chars &&
@@ -290,8 +290,7 @@ _rl_errmsg (va_alist)
 
 #else /* !USE_VARARGS */
 void
-_rl_ttymsg (format, arg1, arg2)
-     char *format;
+_rl_ttymsg (char* format, char* arg1, char* arg2)
 {
   fprintf (stderr, "readline: ");
   fprintf (stderr, format, arg1, arg2);
@@ -301,8 +300,7 @@ _rl_ttymsg (format, arg1, arg2)
 }
 
 void
-_rl_errmsg (format, arg1, arg2)
-     char *format;
+_rl_errmsg (char* format, char* arg1, char* arg2)
 {
   fprintf (stderr, "readline: ");
   fprintf (stderr, format, arg1, arg2);

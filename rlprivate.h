@@ -450,8 +450,8 @@ extern void _rl_ttymsg (const char *, ...)  __attribute__((__format__ (printf, 1
 extern void _rl_errmsg (const char *, ...)  __attribute__((__format__ (printf, 1, 2)));
 extern void _rl_trace (const char *, ...)  __attribute__((__format__ (printf, 1, 2)));
 #else
-extern void _rl_ttymsg ();
-extern void _rl_errmsg ();
+extern void _rl_ttymsg (char*, char*, char*);
+extern void _rl_errmsg (char*, char*, char*);
 extern void _rl_trace ();
 #endif
 extern void _rl_audit_tty (char *);
