@@ -15,55 +15,55 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-RL_LIBRARY_VERSION = @LIBVERSION@
+RL_LIBRARY_VERSION = 8.2
 RL_LIBRARY_NAME = ncsh_readline
 
-PACKAGE = @PACKAGE_NAME@
-VERSION = @PACKAGE_VERSION@
+PACKAGE = ncsh_readline
+VERSION = 8.2
 
-PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
-PACKAGE_NAME = @PACKAGE_NAME@
-PACKAGE_STRING = @PACKAGE_STRING@
-PACKAGE_VERSION = @PACKAGE_VERSION@
+PACKAGE_BUGREPORT = alexeski@gmail.com
+PACKAGE_NAME = ncsh_readline
+PACKAGE_STRING = ncsh_readline 8.2
+PACKAGE_VERSION = 8.2
 
-PACKAGE_TARNAME = @PACKAGE_TARNAME@
+PACKAGE_TARNAME = ncsh_readline
 
-srcdir = @srcdir@
-VPATH = @srcdir@
-top_srcdir = @top_srcdir@
-BUILD_DIR = @BUILD_DIR@
+srcdir = .
 
-INSTALL = @INSTALL@
-INSTALL_PROGRAM = @INSTALL_PROGRAM@
-INSTALL_DATA = @INSTALL_DATA@
+top_srcdir = .
+BUILD_DIR = /home/alex/readline
 
-CC = @CC@
-RANLIB = @RANLIB@
-AR = @AR@
-ARFLAGS = @ARFLAGS@
+INSTALL = /usr/bin/install -c
+INSTALL_PROGRAM = ${INSTALL}
+INSTALL_DATA = ${INSTALL} -m 644
+
+CC = gcc
+RANLIB = ranlib
+AR = ar
+ARFLAGS = cr
 RM = rm -f
 CP = cp
 MV = mv
 
-@SET_MAKE@
-SHELL = @MAKE_SHELL@
 
-prefix = @prefix@
-exec_prefix = @exec_prefix@
+SHELL = /bin/sh
 
-datarootdir = @datarootdir@
+prefix = /usr/local
+exec_prefix = ${prefix}
 
-bindir = @bindir@
-libdir = @libdir@
-mandir = @mandir@
-includedir = @includedir@
-datadir = @datadir@
-localedir = @localedir@
+datarootdir = ${prefix}/share
+
+bindir = ${exec_prefix}/bin
+libdir = ${exec_prefix}/lib
+mandir = ${datarootdir}/man
+includedir = ${prefix}/include
+datadir = ${datarootdir}
+localedir = ${datarootdir}/locale
 pkgconfigdir = ${libdir}/pkgconfig
 
-infodir = @infodir@
+infodir = ${datarootdir}/info
 
-docdir = @docdir@
+docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 
 man3dir = $(mandir)/man3
 
@@ -74,14 +74,14 @@ DESTDIR =
 ETAGS = etags
 CTAGS = ctags -w
 
-CFLAGS = @CFLAGS@
-LOCAL_CFLAGS = @LOCAL_CFLAGS@ -DRL_LIBRARY_VERSION='"$(RL_LIBRARY_VERSION)"' @BRACKETED_PASTE@
-CPPFLAGS = @CPPFLAGS@
+CFLAGS = -g -O2 -Wno-parentheses -Wno-format-security -Wno-tautological-constant-out-of-range-compare
+LOCAL_CFLAGS =  -DRL_LIBRARY_VERSION='"$(RL_LIBRARY_VERSION)"' -DBRACKETED_PASTE_DEFAULT=1
+CPPFLAGS =
 
-DEFS = @DEFS@ @CROSS_COMPILE@
-LOCAL_DEFS = @LOCAL_DEFS@
+DEFS = -DHAVE_CONFIG_H
+LOCAL_DEFS =
 
-TERMCAP_LIB = @TERMCAP_LIB@
+TERMCAP_LIB = -ltermcap
 
 # For libraries which include headers from other libraries.
 INCLUDES = -I. -I$(srcdir)
@@ -93,12 +93,12 @@ CCFLAGS = $(XCCFLAGS) $(LOCAL_CFLAGS) $(CFLAGS)
 GCC_LINT_FLAGS = -ansi -Wall -Wshadow -Wpointer-arith -Wcast-qual \
 		 -Wwrite-strings -Wstrict-prototypes \
 		 -Wmissing-prototypes -Wno-implicit -pedantic
-GCC_LINT_CFLAGS = $(XCCFLAGS) $(GCC_LINT_FLAGS) @CFLAGS@ @LOCAL_CFLAGS@
+GCC_LINT_CFLAGS = $(XCCFLAGS) $(GCC_LINT_FLAGS) -g -O2 -Wno-parentheses -Wno-format-security -Wno-tautological-constant-out-of-range-compare
 
 ASAN_XCFLAGS = -fsanitize=address -fno-omit-frame-pointer
 ASAN_XLDFLAGS = -fsanitize=address
 
-install_examples = @EXAMPLES_INSTALL_TARGET@
+install_examples = install-examples
 
 .c.o:
 	${RM} $@
@@ -109,7 +109,7 @@ LIBRARY_NAME = libncsh_readline.a
 STATIC_LIBS = libncsh_readline.a libhistory.a
 
 # The C code source files for this library.
-CSOURCES = $(srcdir)/ncsh_readline.c $(srcdir)/ncsh_arena.c $(srcdir)/ncsh_autocompletions.c
+CSOURCES = $(srcdir)/ncsh_readline.c $(srcdir)/ncsh_arena.c $(srcdir)/ncsh_autocompletions.c \
 	   $(srcdir)/readline.c $(srcdir)/funmap.c $(srcdir)/keymaps.c \
 	   $(srcdir)/vi_mode.c $(srcdir)/parens.c $(srcdir)/rltty.c \
 	   $(srcdir)/complete.c $(srcdir)/bind.c $(srcdir)/isearch.c \
@@ -124,7 +124,7 @@ CSOURCES = $(srcdir)/ncsh_readline.c $(srcdir)/ncsh_arena.c $(srcdir)/ncsh_autoc
 	   $(srcdir)/mbutil.c
 
 # The header files for this library.
-HSOURCES = $(srcdir)/ncsh_readline.h $(srcdir)/ncsh_arena.h $(srcdir)/ncsh_autocompletions.h $(srcdir)/ncsh_string.h
+HSOURCES = $(srcdir)/ncsh_readline.h $(srcdir)/ncsh_arena.h $(srcdir)/ncsh_autocompletions.h $(srcdir)/ncsh_string.h \
 	   $(srcdir)/readline.h $(srcdir)/rldefs.h $(srcdir)/chardefs.h \
 	   $(srcdir)/keymaps.h $(srcdir)/history.h $(srcdir)/histlib.h \
 	   $(srcdir)/posixstat.h $(srcdir)/posixdir.h $(srcdir)/posixjmp.h \
@@ -137,7 +137,7 @@ HSOURCES = $(srcdir)/ncsh_readline.h $(srcdir)/ncsh_arena.h $(srcdir)/ncsh_autoc
 HISTOBJ = history.o histexpand.o histfile.o histsearch.o shell.o mbutil.o
 TILDEOBJ = tilde.o
 COLORSOBJ = colors.o parse-colors.o
-OBJECTS = ncsh_readline.o readline.o vi_mode.o funmap.o keymaps.o parens.o search.o \
+OBJECTS = ncsh_readline.o ncsh_arena.o ncsh_autocompletions.o readline.o vi_mode.o funmap.o keymaps.o parens.o search.o \
 	  rltty.o complete.o bind.o isearch.o display.o signals.o \
 	  util.o kill.o undo.o macro.o input.o callback.o terminal.o \
 	  text.o nls.o misc.o $(HISTOBJ) $(TILDEOBJ) $(COLORSOBJ) \
@@ -154,15 +154,15 @@ CREATED_CONFIGURE = config.status config.h config.cache config.log \
 		    stamp-config stamp-h readline.pc history.pc
 CREATED_TAGS = TAGS tags
 
-INSTALLED_HEADERS = ncsh_readline.h readline.h chardefs.h keymaps.h history.h tilde.h \
+INSTALLED_HEADERS = ncsh_readline.h ncsh_arena.h ncsh_string.h ncsh_autocompletions.h readline.h chardefs.h keymaps.h history.h tilde.h \
 		    rlstdc.h rlconf.h rltypedefs.h
 
 OTHER_DOCS = $(srcdir)/CHANGES $(srcdir)/INSTALL $(srcdir)/README
 OTHER_INSTALLED_DOCS = CHANGES INSTALL README
 
 ##########################################################################
-TARGETS = @STATIC_TARGET@ @SHARED_TARGET@
-INSTALL_TARGETS = @STATIC_INSTALL_TARGET@ @SHARED_INSTALL_TARGET@
+TARGETS = static shared
+INSTALL_TARGETS = install-static install-shared
 
 all: $(TARGETS)
 
@@ -189,7 +189,7 @@ tilde.o:	tilde.c
 	rm -f $@
 	$(CC) $(CCFLAGS) -DREADLINE_LIBRARY -c $(srcdir)/tilde.c
 
-ncsh_readline: $(OBJECTS) ncsh_readline.h readline.h rldefs.h chardefs.h ./libncsh_readline.a
+ncsh_readline: $(OBJECTS) ncsh_readline.h ncsh_arena.h ncsh_autocompletions.h ncsh_string.h readline.h rldefs.h chardefs.h ./libncsh_readline.a
 	$(CC) $(CCFLAGS) -DREADLINE_LIBRARY -o $@ $(top_srcdir)/examples/rl.c ./libncsh_readline.a ${TERMCAP_LIB}
 
 readline: $(OBJECTS) readline.h rldefs.h chardefs.h ./libreadline.a
@@ -425,6 +425,8 @@ readline.o: readline.h keymaps.h rltypedefs.h chardefs.h tilde.h
 readline.o: rldefs.h ${BUILD_DIR}/config.h rlconf.h
 readline.o: history.h rlstdc.h
 readline.o: posixstat.h ansi_stdlib.h posixjmp.h
+ncsh_arena.o: ncsh_arena.h
+ncsh_autocompletions.o: ncsh_autocompletions.h ncsh_string.h ncsh_arena.h
 ncsh_readline.o: ncsh_readline.h ncsh_arena.h ncsh_autocompletions.h ncsh_string.h readline.h keymaps.h rltypedefs.h chardefs.h tilde.h
 ncsh_readline.o: rldefs.h ${BUILD_DIR}/config.h rlconf.h
 ncsh_readline.o: history.h rlstdc.h
@@ -568,7 +570,9 @@ misc.o: $(srcdir)/misc.c
 nls.o: $(srcdir)/nls.c
 parens.o: $(srcdir)/parens.c
 readline.o: $(srcdir)/readline.c
-ncsh_readline.o: $(srcdir)/ncsh_readline.c $(srcdir)/readline.c
+ncsh_arena.o: $(srcdir)/ncsh_arena.c
+ncsh_autocompletions.o: $(srcdir)/ncsh_autocompletions.c
+ncsh_readline.o: $(srcdir)/ncsh_readline.c $(srcdir)/ncsh_arena.c $(srcdir)/ncsh_autocompletions.c $(srcdir)/readline.c
 rltty.o: $(srcdir)/rltty.c
 savestring.o: $(srcdir)/savestring.c
 search.o: $(srcdir)/search.c
@@ -607,7 +611,7 @@ misc.o: misc.c
 nls.o: nls.c
 parens.o: parens.c
 readline.o: readline.c
-ncsh_readline.o: ncsh_readline.c readline.c
+ncsh_readline.o: ncsh_readline.c ncsh_arena.c ncsh_autocompletions.c readline.c
 rltty.o: rltty.c
 savestring.o: savestring.c
 search.o: search.c
