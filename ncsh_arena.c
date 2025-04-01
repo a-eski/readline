@@ -26,12 +26,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-// #if defined (READLINE_LIBRARY)
+#if defined (READLINE_LIBRARY)
 #  include "ncsh_arena.h"
-// #else
-// #  include <readline/ncsh_arena.h>
-// #endif
+#else
+#  include <readline/ncsh_arena.h>
+#endif
 
+__attribute_malloc__
 void* ncsh_arena_malloc_internal(struct ncsh_Arena* arena,
                      uintptr_t count,
                      uintptr_t size,
@@ -49,6 +50,7 @@ void* ncsh_arena_malloc_internal(struct ncsh_Arena* arena,
     return memset(val, 0, count * size);
 }
 
+__attribute_malloc__
 void* ncsh_arena_realloc_internal(struct ncsh_Arena* arena,
                      uintptr_t count,
                      uintptr_t size,
