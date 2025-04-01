@@ -17,7 +17,9 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
+#pragma once
 #ifndef NCSH_AUTOCOMPLETIONS_H_
+#define NCSH_AUTOCOMPLETIONS_H_
 
 // #if defined (READLINE_LIBRARY)
 #  include "ncsh_arena.h"

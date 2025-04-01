@@ -1,6 +1,8 @@
 /* Copyright ncsh by Alex Eski 2024 */
 
+#pragma once
 #ifndef NCSH_STRING_H_
+#define NCSH_STRING_H_
 
 #include <stddef.h>
 #include <stdint.h>
