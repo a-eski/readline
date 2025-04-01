@@ -3,7 +3,7 @@
 /* Copyright (C) 1994-2021 Free Software Foundation, Inc.
 
    This file is part of the GNU Readline Library (Readline), a library
-   for reading lines of text with interactive input and history editing.      
+   for reading lines of text with interactive input and history editing.
 
    Readline is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -416,15 +416,15 @@ int
 _rl_nchars_available ()
 {
   int chars_avail, fd, result;
-  
+
   chars_avail = 0;
-     
+
 #if defined (FIONREAD)
   fd = fileno (rl_instream);
-  errno = 0;    
-  result = ioctl (fd, FIONREAD, &chars_avail);    
-  if (result == -1 && errno == EIO)    
-    return -1;    
+  errno = 0;
+  result = ioctl (fd, FIONREAD, &chars_avail);
+  if (result == -1 && errno == EIO)
+    return -1;
 #endif
 
   return chars_avail;
@@ -443,7 +443,7 @@ _rl_input_queued (int t)
 
 void
 _rl_insert_typein (int c)
-{    	
+{
   int key, t, i;
   char *string;
 
@@ -763,7 +763,7 @@ rl_read_key (void)
   else
     {
       /* If input is coming from a macro, then use that. */
-      if (c = _rl_next_macro_key ())
+      if ((c = _rl_next_macro_key ()))
 	return ((unsigned char)c);
 
       /* If the user has an event function, then call it periodically. */
@@ -773,7 +773,7 @@ rl_read_key (void)
 	    {
 	      if (rl_get_char (&c) != 0)
 		break;
-		
+
 	      if ((r = rl_gather_tyi ()) < 0)	/* XXX - EIO */
 		{
 		  rl_done = 1;
@@ -964,7 +964,7 @@ _rl_read_mbchar (char *mbchar, int size)
   memset(&ps, 0, sizeof (mbstate_t));
   memset(&ps_back, 0, sizeof (mbstate_t));
 
-  mb_len = 0;  
+  mb_len = 0;
   while (mb_len < size)
     {
       c = (mb_len == 0) ? _rl_bracketed_read_key () : rl_read_key ();
@@ -982,7 +982,7 @@ _rl_read_mbchar (char *mbchar, int size)
 	  /* shorted bytes */
 	  ps = ps_back;
 	  continue;
-	} 
+	}
       else if (mbchar_bytes_length == 0)
 	{
 	  mbchar[0] = '\0';	/* null wide character */

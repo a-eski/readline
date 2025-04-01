@@ -72,7 +72,7 @@ void ncsh_autocompletions_add(const char* const string,
     tree->is_end_of_a_word = true;
 }
 
-void ncsh_autocompletions_add_multiple(const struct ncsh_String* const strings,
+void ncsh_autocompletions_add_multiple(struct ncsh_String* const strings,
                                        const int count,
                                        struct ncsh_Autocompletion_Node* restrict tree,
                                        struct ncsh_Arena* const arena)

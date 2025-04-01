@@ -16,6 +16,8 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 #pragma once
+#ifndef NCSH_ARENA_H_
+#define NCSH_ARENA_H_
 
 #include <stdint.h>
 
@@ -44,3 +46,5 @@ void* ncsh_arena_realloc_internal(struct ncsh_Arena* arena,
                      uintptr_t alignment,
                      void* old_ptr,
                      uintptr_t old_count);
+
+#endif /* !NCSH_ARENA_H_ */
