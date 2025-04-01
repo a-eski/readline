@@ -17,7 +17,7 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-#pragma once
+#ifndef NCSH_AUTOCOMPLETIONS_H_
 
 // #if defined (READLINE_LIBRARY)
 #  include "ncsh_arena.h"
@@ -48,7 +48,7 @@ struct ncsh_Autocompletion_Node {
     struct ncsh_Autocompletion_Node* nodes[NCSH_LETTERS];
 };
 
-/* I don't use typedefs in most of my projects, but use here to keep consistent with readline style */
+/* Typedef to keep consistent with readline style */
 typedef struct ncsh_Autocompletion_Node Autocompletion_Node;
 
 struct ncsh_Autocompletion {
@@ -72,27 +72,27 @@ struct ncsh_Autocompletion_Node* ncsh_autocompletions_alloc(struct ncsh_Arena* c
 
 void ncsh_autocompletions_add(const char* const string,
                               const size_t length,
-                              struct ncsh_Autocompletion_Node* restrict tree,
+                              struct ncsh_Autocompletion_Node* tree,
                               struct ncsh_Arena* const arena);
 
-void ncsh_autocompletions_add_multiple(const struct ncsh_String* const strings,
+void ncsh_autocompletions_add_multiple(struct ncsh_String* const strings,
                                        const int count,
-                                       struct ncsh_Autocompletion_Node* restrict tree,
+                                       struct ncsh_Autocompletion_Node* tree,
                                        struct ncsh_Arena* const arena);
 
 struct ncsh_Autocompletion_Node* ncsh_autocompletions_search(const char* const string,
                                                              const size_t length,
-                                                             struct ncsh_Autocompletion_Node* restrict tree);
+                                                             struct ncsh_Autocompletion_Node* tree);
 
 struct ncsh_Autocompletion_Node* ncsh_autocompletions_search_string(const struct ncsh_String string,
-                                                                    struct ncsh_Autocompletion_Node* restrict tree);
+                                                                    struct ncsh_Autocompletion_Node* tree);
 
 // gets all matches based on traversing the tree.
 // populates matches into variable matches and returns 0 if no matches, number of matches length if any matches.
 uint_fast8_t ncsh_autocompletions_get(const char* const search,
                                       const size_t search_length,
                                       struct ncsh_Autocompletion* matches,
-                                      struct ncsh_Autocompletion_Node* restrict tree,
+                                      struct ncsh_Autocompletion_Node* tree,
                                       struct ncsh_Arena scratch_arena);
 
 // gets highest weighted match based on traversing the tree.
@@ -100,5 +100,7 @@ uint_fast8_t ncsh_autocompletions_get(const char* const search,
 uint_fast8_t ncsh_autocompletions_first(const char* const search,
                                         const size_t search_length,
                                         char* match,
-                                        struct ncsh_Autocompletion_Node* restrict tree,
+                                        struct ncsh_Autocompletion_Node* tree,
                                         struct ncsh_Arena scratch_arena);
+
+#endif /* !NCSH_AUTOCOMPLETIONS_H_ */

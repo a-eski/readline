@@ -105,8 +105,8 @@ COMMAND commands[] = {
 };
 
 /* Forward declarations. */
-char *stripwhite ();
-COMMAND *find_command ();
+char *stripwhite (char*);
+COMMAND *find_command (char*);
 
 /* The name of this program, as taken from argv[0]. */
 char *progname;
@@ -115,8 +115,7 @@ char *progname;
 int done;
 
 char *
-dupstr (s)
-     char *s;
+dupstr (char *s)
 {
   char *r;
 
@@ -126,9 +125,7 @@ dupstr (s)
 }
 
 int
-main (argc, argv)
-     int argc;
-     char **argv;
+main (int argc, char **argv)
 {
   char *line, *s;
 
@@ -162,8 +159,7 @@ main (argc, argv)
 
 /* Execute a command line. */
 int
-execute_line (line)
-     char *line;
+execute_line (char *line)
 {
   register int i;
   COMMAND *command;
@@ -217,14 +213,13 @@ find_command (name)
 /* Strip whitespace from the start and end of STRING.  Return a pointer
    into STRING. */
 char *
-stripwhite (string)
-     char *string;
+stripwhite (char *string)
 {
   register char *s, *t;
 
   for (s = string; whitespace (*s); s++)
     ;
-    
+
   if (*s == 0)
     return (s);
 

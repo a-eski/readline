@@ -1,6 +1,6 @@
 /* Copyright ncsh by Alex Eski 2024 */
 
-#pragma once
+#ifndef NCSH_STRING_H_
 
 #include <stddef.h>
 #include <stdint.h>
@@ -41,3 +41,5 @@ bool ncsh_string_compare_const(const char* const str, const size_t str_len,
 
     return !str_len || !memcmp(str, str_two, str_len);
 }
+
+#endif /* !NCSH_STRING_H_ */

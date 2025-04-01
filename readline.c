@@ -20,7 +20,6 @@
    along with Readline.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ncsh_readline.h"
 #define READLINE_LIBRARY
 
 #if defined (HAVE_CONFIG_H)
