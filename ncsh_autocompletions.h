@@ -21,13 +21,13 @@
 #ifndef NCSH_AUTOCOMPLETIONS_H_
 #define NCSH_AUTOCOMPLETIONS_H_
 
-// #if defined (READLINE_LIBRARY)
+#if defined (READLINE_LIBRARY)
 #  include "ncsh_arena.h"
 #  include "ncsh_string.h"
-// #else
-// #  include <readline/ncsh_arena.h>
-// #  include <readline/ncsh_string.h>
-// #endif
+#else
+#  include <readline/ncsh_arena.h>
+#  include <readline/ncsh_string.h>
+#endif
 
 /* NCSH_MAX_AUTOCOMPLETION_MATCHES Macro constant
  * Max number of matches a single autocompletion request can return. Used in tab autocomplete use case.

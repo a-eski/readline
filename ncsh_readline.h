@@ -19,9 +19,14 @@
 #ifndef NCSH_READLINE_H_
 #define NCSH_READLINE_H_
 
-#include "readline.h"
-#include "ncsh_autocompletions.h"
-#include "ncsh_arena.h"
+#if defined (READLINE_LIBRARY)
+#   include "readline.h"
+#   include "ncsh_autocompletions.h"
+#   include "ncsh_arena.h"
+#else
+#   include <readline/ncsh_autocompletions.h>
+#   include <readline/ncsh_arena.h>
+#endif
 
 struct ncsh_Readline_Input {
   const char* prompt;
